@@ -29,6 +29,8 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 
+import { ButtonModule } from 'primeng/button';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -129,7 +131,8 @@ import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchan
     MatDialogModule,
     MatChipsModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
