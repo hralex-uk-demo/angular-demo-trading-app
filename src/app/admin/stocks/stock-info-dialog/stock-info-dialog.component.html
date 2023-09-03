@@ -1,0 +1,83 @@
+<h1 mat-dialog-title>Stock Info - TaxAmy</h1>
+<div mat-dialog-content>
+  <div style="width:1000px">
+
+  </div>
+
+  <br>
+  <div>
+
+    <mat-form-field style="width:30%;">
+      <mat-label>Type</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let keywordType of keywordTypes" [value]="keywordType.value">
+          {{keywordType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:30%;margin-left:50px">
+      <mat-label>Company Name</mat-label>
+      <input matInput  required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:30%; margin-left:50px">
+      <mat-label>location</mat-label>
+      <input matInput  required>
+    </mat-form-field>
+  </div>
+
+  <br>
+  <div>
+    <mat-form-field appearance="fill" style="width:30%">
+      <mat-label>Primary Skills</mat-label>
+      <input matInput  required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:30%; margin-left:50px">
+      <mat-label>Experience</mat-label>
+      <input matInput  required>
+    </mat-form-field>
+
+    <mat-form-field style="width:30%; margin-left:50px">
+      <mat-label>Type</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let jobType of jobTypes" [value]="jobType.value">
+          {{jobType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <br>
+  <div>
+    <mat-form-field appearance="fill" style="width:65%">
+      <mat-label>Job URL</mat-label>
+      <input matInput  required>
+    </mat-form-field>
+
+
+    <mat-form-field style="width:30%; margin-left:50px">
+      <mat-label>Status</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let statusType of statusTypes" [value]="statusType.value">
+          {{statusType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions>
+  <button type="submit" mat-flat-button color="primary"  style="margin-left:10px;background-color:green;color:white">
+    <mat-icon>done_all</mat-icon>
+    SAVE
+  </button>
+  <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
+    <mat-icon>clear</mat-icon>
+    CANCEL
+  </button>
+</div>

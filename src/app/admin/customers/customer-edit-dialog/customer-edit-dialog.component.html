@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Edit Customer</h1>
+<form  [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div style="width:700px">
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field appearance="fill" style="width:35%;margin-left:10px">
+        <mat-label>First Name</mat-label>
+        <input matInput  formControlName="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width:35%; margin-left:50px" >
+        <mat-label>Last Name</mat-label>
+        <input matInput  formControlName="lastName" required>
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field appearance="fill" style="width:35%;margin-left:10px" >
+        <mat-label>Mobile Number</mat-label>
+        <input matInput  formControlName="mobileNumber" required>
+        <mat-error *ngIf="customerForm.get('mobileNumber')!.hasError('pattern')">Invalid mobile number.</mat-error>    
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width:35%;margin-left:50px" >
+        <mat-label>Total Investment</mat-label>
+        <input matInput  formControlName="totalInvestment" required>
+        <mat-error *ngIf="customerForm.get('totalInvestment')!.hasError('pattern')">Enter a valid number with up to 2 decimal places.</mat-error>     
+      </mat-form-field>
+    </div>
+
+    <br>
+
+     <div>
+      <mat-form-field style="width:35%;margin-left:10px" >
+        <mat-label>Subscription</mat-label>
+        <mat-select formControlName="subscriptionType" required>
+          <mat-option *ngFor="let subscriptionType of subscriptionTypes" [value]="subscriptionType.value">
+            {{subscriptionType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <br>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="customerForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;">
+      <mat-icon>done_all</mat-icon>
+      SAVE
+    </button>
+    <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
+      <mat-icon>clear</mat-icon>
+      CANCEL
+    </button>
+  </div>
+
+</form>

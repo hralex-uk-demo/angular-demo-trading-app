@@ -1,0 +1,91 @@
+<h1 mat-dialog-title>New Stock</h1>
+
+  <div mat-dialog-content>
+
+    <form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+      <div style="width:700px">
+
+      </div>
+
+      <br>
+
+      <div>
+        <mat-form-field appearance="fill" style="width:30%;margin-left:10px">
+          <mat-label>Stock Symbol</mat-label>
+          <input matInput  required formControlName="stockSymbol">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width:60%; margin-left:30px" >
+          <mat-label>Company Name</mat-label>
+          <input matInput  formControlName="companyName" required>
+        </mat-form-field>
+      </div>
+
+      <br>
+
+      <div>
+        <mat-form-field style="width:30%;margin-left:10px" >
+          <mat-label>Stock Exchange</mat-label>
+          <mat-select formControlName="stockExchange" required>
+            <mat-option *ngFor="let exchangeType of exchangeTypes" [value]="exchangeType.value">
+              {{exchangeType.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width:30%; margin-left:30px">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="stockType" required>
+            <mat-option *ngFor="let stockType of stockTypes" [value]="stockType.value">
+              {{stockType.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width:30%;margin-left:10px" >
+          <mat-label>Currency</mat-label>
+          <mat-select formControlName="currencyType" required>
+            <mat-option *ngFor="let currencyType of currencyTypes" [value]="currencyType.value">
+              {{currencyType.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>  
+
+      </div>
+
+      <br>
+
+      <div>
+      
+      </div>
+      <br>
+
+    </form>
+    
+      <div>
+              <input type="file" class="file-input"
+              (change)="onFileSelected($event)" #fileUpload style="display: none;">
+            
+              <div class="file-upload" style="margin-left:10px">
+                  <button mat-mini-fab color="primary" class="upload-btn"
+                    (click)="fileUpload.click()">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  {{selectedIconFileName || "Please upload stock symbol."}}
+              </div>
+      </div>
+
+    </div>
+
+
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button color="primary"  style="margin-left:20px;">
+      <mat-icon>done_all</mat-icon>
+      SAVE
+    </button>
+    <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
+      <mat-icon>clear</mat-icon>
+      CANCEL
+    </button>
+  </div>

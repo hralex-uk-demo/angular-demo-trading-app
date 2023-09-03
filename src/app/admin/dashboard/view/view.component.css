@@ -1,0 +1,16 @@
+.mat-continue-btn {
+    display: inline-block;
+    align-self: center;
+}
+
+.app-users-card {
+    width: 400px;
+    margin-top: 60px;
+    height: 400px;
+  }
+
+.mini-card {
+    width: 220px;
+    margin-top: 20px;
+    margin-left:20px;
+  }

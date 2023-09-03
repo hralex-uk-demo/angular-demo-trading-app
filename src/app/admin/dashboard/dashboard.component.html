@@ -1,0 +1,98 @@
+
+<mat-toolbar style="background-color: #020416;">
+  <button mat-icon-button (click)="drawer.toggle()" style="color: white;"><mat-icon>menu</mat-icon></button>
+  <img mat-card-image src="/assets/investa-logo.png" style="width:10%;margin-left:20px;margin-bottom:0px">
+  <span class="toolbar-spacer"></span>
+  <button mat-icon-button>
+    <mat-icon style="color: white;">person</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="navigation-container" autosize>
+
+  <mat-drawer #drawer mode="side">
+
+    <mat-nav-list >
+
+      <a
+        mat-list-item
+        class="list-item-default theme-font"
+        routerLinkActive="list-item-active"
+        routerLink="/admin/dashboard-view">
+        <mat-icon style="margin-bottom: -4px; padding-right: 5px;">home</mat-icon>Dashboard
+      </a>
+      
+      <a
+        mat-list-item
+        class="list-item-default theme-font"
+        routerLinkActive="list-item-active"
+        routerLink="/admin/customers">
+        <mat-icon style="margin-bottom: -4px; padding-right: 5px;">person</mat-icon>Customers
+      </a>
+
+      <a
+        mat-list-item
+        class="list-item-default theme-font"
+        routerLinkActive="list-item-active"
+        routerLink="/admin/stocks">
+        <mat-icon style="margin-bottom: -4px; padding-right: 5px;">insights</mat-icon>Stocks
+      </a>
+
+      <mat-expansion-panel>        
+        <mat-expansion-panel-header>
+            <div class="list-item-default theme-font">
+              <mat-icon style="margin-bottom: -4px; padding-right: 5px;">settings</mat-icon>Settings
+            </div>
+        </mat-expansion-panel-header>
+
+            <a
+              mat-list-item
+              class="list-item-default theme-font"
+              routerLinkActive="list-item-active"
+              routerLink="settings/sectors">
+              <mat-icon style="margin-bottom: -4px; padding-right: 5px;">list</mat-icon>Sectors
+            </a>
+
+            <a
+              mat-list-item
+              class="list-item-default theme-font"
+              routerLinkActive="list-item-active"
+              routerLink="settings/exchanges">
+              <mat-icon style="margin-bottom: -4px; padding-right: 5px;">currency_exchange</mat-icon>Exchanges
+            </a>
+
+            <a
+              mat-list-item
+              class="list-item-default theme-font"
+              routerLinkActive="list-item-active"
+              routerLink="settings/currencies">
+              <mat-icon style="margin-bottom: -4px; padding-right: 5px;">payments</mat-icon>Currencies
+            </a>
+          
+            <a
+              mat-list-item
+              class="list-item-default theme-font"
+              routerLinkActive="list-item-active"
+              routerLink="settings/subscriptions">
+              <mat-icon style="margin-bottom: -4px; padding-right: 5px;">subscriptions</mat-icon>Subscriptions
+            </a>
+           
+      </mat-expansion-panel>
+      <a
+        mat-list-item
+        class="list-item-default theme-font"
+        routerLinkActive="list-item-active"
+        routerLink="/">
+        <mat-icon style="margin-bottom: -4px; padding-right: 5px;">logout</mat-icon>Logout
+      </a>
+    </mat-nav-list>
+
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

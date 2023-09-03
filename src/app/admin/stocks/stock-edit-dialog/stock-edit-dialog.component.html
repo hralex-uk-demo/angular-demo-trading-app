@@ -1,0 +1,73 @@
+<h1 mat-dialog-title>New Stock</h1>
+<form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div style="width:700px">
+
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field style="width:30%;margin-left:10px" >
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option *ngFor="let statusType of statusTypes" [value]="statusType.value">
+            {{statusType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field appearance="fill" style="width:30%;margin-left:10px">
+        <mat-label>Stock Symbol</mat-label>
+        <input matInput  required formControlName="stockSymbol">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width:50%; margin-left:50px" >
+        <mat-label>Company Name</mat-label>
+        <input matInput  formControlName="companyName" required>
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field style="width:30%;margin-left:10px" >
+        <mat-label>Stock Exchange</mat-label>
+        <mat-select formControlName="stockExchange" required>
+          <mat-option *ngFor="let exchangeType of exchangeTypes" [value]="exchangeType.value">
+            {{exchangeType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width:50%; margin-left:50px">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="stockType" required>
+          <mat-option *ngFor="let stockType of stockTypes" [value]="stockType.value">
+            {{stockType.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <br>
+  
+  </div>
+
+
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="stockForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;">
+      <mat-icon>done_all</mat-icon>
+      UDPATE
+    </button>
+    <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
+      <mat-icon>clear</mat-icon>
+      CANCEL
+    </button>
+  </div>
+</form>

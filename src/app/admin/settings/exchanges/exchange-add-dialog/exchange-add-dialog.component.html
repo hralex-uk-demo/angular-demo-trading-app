@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>New Exchange</h1>
+<form  [formGroup]="exchangeForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <div style="width:700px">
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field appearance="fill" style="width:35%;margin-left:10px">
+        <mat-label>Code</mat-label>
+        <input matInput  formControlName="code" required>
+        <mat-error *ngIf="exchangeForm.get('code')!.hasError('pattern')">Invalid code.</mat-error>        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width:35%; margin-left:50px" >
+        <mat-label>Name</mat-label>
+        <input matInput  formControlName="name" required>                
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div>
+      <mat-form-field appearance="fill" style="width:35%;margin-left:10px" >
+        <mat-label>Opening Hours</mat-label>
+        <input matInput  formControlName="openingHours" required>        
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width:35%;margin-left:50px" >
+        <mat-label>Closing Hours</mat-label>
+        <input matInput  formControlName="closingHours" required>   
+      </mat-form-field>
+    </div>
+
+    <br>
+
+    <div>
+        <mat-form-field appearance="fill" style="width:35%;margin-left:10px" >
+          <mat-label>Location</mat-label>
+          <input matInput  formControlName="location" required>        
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" style="width:35%;margin-left:50px" >
+          <mat-label>Time Zone</mat-label>
+          <input matInput  formControlName="timeZone" required>   
+        </mat-form-field>
+      </div>
+
+    <br>
+
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="exchangeForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;">
+      <mat-icon>done_all</mat-icon>
+      SAVE
+    </button>
+    <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
+      <mat-icon>clear</mat-icon>
+      CANCEL
+    </button>
+  </div>
+
+</form>

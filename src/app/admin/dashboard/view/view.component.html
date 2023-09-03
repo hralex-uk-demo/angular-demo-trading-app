@@ -1,0 +1,81 @@
+<mat-grid-list cols="6" rowHeight="100px">
+
+    <mat-grid-tile colspan="4" rowspan="1" >
+
+        <mat-card class="mini-card" style="background-color:lightseagreen">
+            <mat-card-header>
+              <mat-card-title>Customers</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1>5236</h1>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="mini-card" style="background-color:lightskyblue">
+            <mat-card-header>
+              <mat-card-title>Stocks</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1>150</h1>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="mini-card" style="background-color:lightcoral">
+            <mat-card-header>
+              <mat-card-title>Trades</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1>7689</h1>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="mini-card" style="background-color:orange">
+            <mat-card-header>
+              <mat-card-title>Subscriptions</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h1>167</h1>
+            </mat-card-content>
+          </mat-card>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2" rowspan="6">
+        <mat-list style="margin-top:-120px;margin-left:-200px">
+            <div mat-subheader>New stocks</div>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngFor="let stockData of stocksData">
+               <img matListItemIcon [src]="getStockImageURL(stockData.stockSymbol)" alt="Stock Image">
+              <div matListItemTitle>{{stockData.stockSymbol}}</div>
+              <div matListItemLine>{{stockData.companyName}}</div>
+            </mat-list-item>
+        </mat-list>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2" rowspan="5">
+        <mat-card class="app-users-card">
+            <mat-card-header>
+              <mat-card-title>Shares Overview</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <br>
+                <app-shareprice-overview-chart> </app-shareprice-overview-chart>
+            </mat-card-content>
+        </mat-card>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="2" rowspan="5">
+        <mat-card class="app-users-card">
+            <mat-card-header>
+              <mat-card-title>Mobile Platform Overview</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <br>
+                <app-customers-overview-chart> </app-customers-overview-chart>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>

@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.navigation-container {
+  width: 98%;
+  height: 85%;
+  margin: 10px;
+}
+
+.dashboard-card {
+  max-width: 100%;
+}
+
+.theme-font {
+    font-family: Poppins,sans-serif!important;
+}
+
+.fw-500 {
+    font-weight: 500!important
+}
+
+.fs-16 {
+    font-size: 16px!important;
+}
+
+.fs-24 {
+    font-size: 24px!important;
+}
+
+.width-50-percent{
+  width: 50%;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}

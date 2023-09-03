@@ -1,0 +1,102 @@
+<div>
+    <mat-card class="dashboard-card" style="margin-left:20px;margin-right:20px;">
+  
+      <mat-card-header style="background-color:lightseagreen;height:30px; padding: 8px 16px;">
+        <mat-card-title style="color:white; margin-bottom:15px;">Customers</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <br>
+  
+        <div style="display: flex;">
+          <div style="flex: 1;">
+            <mat-form-field style="width:500px">
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search by name or mobile number" #input>
+            </mat-form-field>
+          </div>
+          <div style="flex: 1; margin-left:50%">
+            <button mat-fab extended  style="background-color:#F5F5F5;color:#034F83" (click)="openCustomerAddDialog()">
+              <mat-icon>add</mat-icon>
+              New
+            </button>
+          </div>
+        </div>
+  
+        <div class="mat-elevation-z2" style="height:410px;overflow-y: auto;">
+          <table mat-table [dataSource]="dataSource" matSort>
+          
+            <!-- Name -->
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>NAME</th>
+              <td mat-cell *matCellDef="let row">  {{row.firstName}} {{row.lastName}} </td>
+            </ng-container>
+  
+            <!-- Mobile Number -->
+            <ng-container matColumnDef="mobileNumber">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>MOBILE NUMBER</th>
+              <td mat-cell *matCellDef="let row">  {{row.mobileNumber}} </td>
+            </ng-container>
+  
+            <!-- Total Invested Amount -->
+            <ng-container matColumnDef="totalInvestment">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>TOTAL INVESTMENT</th>
+              <td mat-cell *matCellDef="let row">  {{row.totalInvestment}} </td>
+            </ng-container>
+  
+            <!-- Current Value -->
+            <ng-container matColumnDef="currentValue">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>CURRENT VALUE</th>
+              <td mat-cell *matCellDef="let row">  {{row.currentValue}} </td>
+            </ng-container>
+  
+            <!-- Change -->
+            <ng-container matColumnDef="change">
+              <th mat-header-cell *matHeaderCellDef>CHANGE</th>
+              <td mat-cell *matCellDef="let row" [ngClass]="getColorClass(calculateInvestmentChange(row.totalInvestment, row.currentValue))">
+                {{ calculateInvestmentChange(row.totalInvestment, row.currentValue) + '%' }}
+              </td>
+            </ng-container>
+
+            <!-- Subscription -->
+            <ng-container matColumnDef="subscriptionType">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>SUBSCRIPTION</th>
+              <td mat-cell *matCellDef="let row">  {{row.subscriptionType}} </td>
+            </ng-container>
+  
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
+              <td mat-cell *matCellDef="let row">
+                <div class="text-center">
+                  <button mat-icon-button (click)="openCustomerEditDialog(row)">
+                    <mat-icon fontIcon="edit_note"></mat-icon>
+                  </button>
+                  <button mat-icon-button (click)="openCustomerDeleteDialog(row)">
+                    <mat-icon fontIcon="delete"></mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">
+                    <div>                          
+                            <h4 style="font-weight: 800;margin-top: 10%; margin-left: 60%;color: red;">No data matching the filter.</h4>
+                    </div>
+              </td>
+            </tr>
+          </table>        
+        </div>
+  
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of files"></mat-paginator>
+  
+      </mat-card-content>
+  
+    </mat-card>
+  </div>
+  
+  
