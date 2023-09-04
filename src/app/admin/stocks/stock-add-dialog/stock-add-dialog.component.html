@@ -67,7 +67,7 @@
               (change)="onFileSelected($event)" #fileUpload style="display: none;">
             
               <div class="file-upload" style="margin-left:10px">
-                  <button mat-mini-fab color="primary" class="upload-btn"
+                  <button mat-mini-fab style="background-color: grey;" class="upload-btn"
                     (click)="fileUpload.click()">
                     <mat-icon>attach_file</mat-icon>
                   </button>
@@ -80,7 +80,7 @@
 
   <mat-divider></mat-divider>
   <div mat-dialog-actions>
-    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button color="primary"  style="margin-left:20px;">
+    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button color="primary"  style="margin-left:20px;background-color:#36f; color:white">
       <mat-icon>done_all</mat-icon>
       SAVE
     </button>

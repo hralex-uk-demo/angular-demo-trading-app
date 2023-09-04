@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>New Stock</h1>
+<h1 mat-dialog-title>Edit Stock</h1>
 <form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
     <div style="width:700px">
@@ -61,7 +61,7 @@
 
   <mat-divider></mat-divider>
   <div mat-dialog-actions>
-    <button type="submit" [disabled]="stockForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;">
+    <button type="submit" [disabled]="stockForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;background-color:#36f; color:white">
       <mat-icon>done_all</mat-icon>
       UDPATE
     </button>

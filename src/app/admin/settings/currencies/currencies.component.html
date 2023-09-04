@@ -1,7 +1,7 @@
 <div>
     <mat-card class="dashboard-card" style="margin-left:20px;margin-right:20px;">
   
-      <mat-card-header style="background-color:lightseagreen;height:30px; padding: 8px 16px;">
+      <mat-card-header style="background-color:#36f;height:50px; padding: 8px 16px;">
         <mat-card-title style="color:white; margin-bottom:15px;">Currencies</mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -15,14 +15,14 @@
             </mat-form-field>
           </div>
           <div style="flex: 1; margin-left:50%">
-            <button mat-fab extended  style="background-color:#F5F5F5;color:#034F83" (click)="openCurrencyAddDialog()">
+            <button mat-fab extended  style="background-color:#F5F5F5;color:#36f" (click)="openCurrencyAddDialog()">
               <mat-icon>add</mat-icon>
               New
             </button>
           </div>
         </div>
   
-        <div class="mat-elevation-z2" style="height:410px;overflow-y: auto;">
+        <div class="mat-elevation-z2" style="height:400px;overflow-y: auto;">
           <table mat-table [dataSource]="dataSource" matSort>
           
             <!-- Symbol -->
