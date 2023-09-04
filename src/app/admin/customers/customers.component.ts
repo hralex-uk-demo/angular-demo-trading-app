@@ -12,6 +12,7 @@ import { AdminService } from '../../admin/shared/service/admin.service';
 import { CustomerAddDialogComponent } from '../../admin/customers/customer-add-dialog/customer-add-dialog.component';
 import { CustomerEditDialogComponent } from '../../admin/customers/customer-edit-dialog/customer-edit-dialog.component';
 import { CustomerDeleteDialogComponent } from '../../admin/customers/customer-delete-dialog/customer-delete-dialog.component';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-customers',
@@ -119,6 +120,11 @@ export class CustomersComponent implements AfterViewInit {
   getColorClass(changePercentage: any): string {
     const changePercentageFloat = parseFloat(changePercentage);
     return changePercentage > 0 ? 'positive-value' : changePercentage < 0 ? 'negative-value' : '';
+  }
+
+  getArrowTypesClass(changePercentage: any): string {
+    const changePercentageFloat = parseFloat(changePercentage);
+    return changePercentage > 0 ? 'arrow_upward' : changePercentage < 0 ? 'arrow_downward' : '';
   }
   
 

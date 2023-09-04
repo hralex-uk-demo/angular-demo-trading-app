@@ -30,6 +30,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import { ButtonModule } from 'primeng/button';
+import { TagModule }    from 'primeng/tag';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -132,7 +133,8 @@ import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchan
     MatChipsModule,
     MatBadgeModule,
     MatExpansionModule,
-    ButtonModule
+    ButtonModule,
+    TagModule
   ],
   providers: [],
   bootstrap: [AppComponent]

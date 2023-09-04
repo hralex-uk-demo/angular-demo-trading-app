@@ -66,7 +66,7 @@
           <!-- Status -->
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
-            <td mat-cell *matCellDef="let row">  {{row.status}} </td>
+            <td mat-cell *matCellDef="let row"> <p-tag  [severity]="row.status === 'New' ? 'primary' : 'success'" value="{{row.status}}"></p-tag>  </td>
           </ng-container>
 
           <!-- Actions Column -->
