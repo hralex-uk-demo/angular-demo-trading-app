@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { Chip } from 'primeng/chip';
 
 interface User {
   type: string;
