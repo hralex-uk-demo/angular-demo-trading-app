@@ -70,6 +70,7 @@ import { ExchangesComponent } from './admin/settings/exchanges/exchanges.compone
 import { ExchangeAddDialogComponent } from './admin/settings/exchanges/exchange-add-dialog/exchange-add-dialog.component';
 import { ExchangeEditDialogComponent } from './admin/settings/exchanges/exchange-edit-dialog/exchange-edit-dialog.component';
 import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchange-delete-dialog/exchange-delete-dialog.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,8 @@ import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchan
     TagModule,
     ChipModule,
     MessagesModule,
-    StoreModule
+    StoreModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
