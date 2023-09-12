@@ -17,8 +17,8 @@ export class SharepriceOverviewChartComponent implements OnInit {
 
   createChart() {
     const data = [
-      { category: 'ESG', value: 80 },
-      { category: 'Dividend', value: 300 },
+      { category: 'Telecom', value: 80 },
+      { category: 'Consumer', value: 300 },
       { category: 'Technology', value: 200 },
       { category: 'Healthcare', value: 100 },
       { category: 'Others', value: 20 },

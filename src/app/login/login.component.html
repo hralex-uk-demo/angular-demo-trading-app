@@ -19,14 +19,14 @@
               Front-end stack : <br>
             </p>
                 <p style=" text-align: left; font-size: 16px; color : rgb(215, 215, 215)">
-                Angular 16, RxJS, NgRx, TypeScript, GraphQL, AG-Grid and Material UI.               
+                Angular 16, RxJS, NgRx, TypeScript, GraphQL, AG-Grid, PrimeNG and Material UI.               
                 </p>
              <br>
             <p style=" text-align: left; font-size: 18px">
               Back-end stack : <br>
             </p>
             <p style=" text-align: left; font-size: 16px; color : rgb(215, 215, 215)">
-               AWS, Node.js, Python, AWS Amplify, AWS CloudFront, AWS Lambda, AWS DynamoDB, AWS S3, Docker and AWS IAM.
+               AWS, Node.js, Python, AWS Amplify, AWS CloudFront, AWS Lambda, AWS DynamoDB, AWS S3, Amazon Cognito, JWT, AWS IAM, Docker, Kubernetes and Jenkins.
             </p>
         </mat-card-subtitle>
         </mat-card-header>
@@ -40,31 +40,45 @@
   </mat-grid-tile>
 
   <mat-grid-tile colspan="1" rowspan="5">
+    
     <mat-card style="height:90%;width:90%;box-shadow: none !important;" class="theme-font;">
       <br>
       <br>
-      <mat-card-header style="display: flex; flex-direction: column;  align-items: center;">
+
+      <mat-card-header >
         <mat-card-title class="fs-24">Sign In</mat-card-title>
       </mat-card-header>
       <br>
-      <mat-card-content style="display: flex; flex-direction: column;  align-items: flex-start;" class="fs-16">
+      <form  [formGroup]="loginForm">
+      <mat-card-content style="display: flex; flex-direction: column; align-items: flex-start;" class="fs-16">
         <br>
-        <mat-form-field  appearance="outline" style="width:40%">
+        
+        <mat-form-field appearance="outline" style="width:40%">
           <mat-label>Username</mat-label>
-          <input matInput value="">
+          <!-- Use ngModel to bind the username input to a component variable -->
+          <input matInput required formControlName="userName">
         </mat-form-field>
         <mat-form-field appearance="outline" style="width:40%">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <mat-label>Password</mat-label>
+          <!-- Use ngModel to bind the password input to a component variable -->
+          <input matInput [type]="hide ? 'password' : 'text'" required formControlName="password" >
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
+        <mat-error *ngIf="invalidLogin">
+          <mat-icon style="margin-bottom: -5px;margin-right: 5px;">error</mat-icon>Invalid credentials, please try again.
+        </mat-error>
+      
       </mat-card-content>
-      <mat-card-actions >
-        <button mat-fab extended (click)="login()" class="button-color-primary" style="background-color:#36f">SIGN IN</button>
-      </mat-card-actions>
+   
+      <mat-card-actions>
+        <!-- Call the login() function when the button is clicked -->
+        <button mat-fab extended (click)="onLogin()" class="button-color-primary" style="background-color:#36f">SIGN IN</button>
+      </mat-card-actions> 
+    </form>
     </mat-card>
+ 
   </mat-grid-tile>
 
   <mat-grid-tile colspan="1" rowspan="2">
