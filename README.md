@@ -12,4 +12,3 @@ It's required by '@apollo/client/core' package so please add it to your tsconfig
 We couldn't enable 'allowSyntheticDefaultImports' flag.
 It's required by '@apollo/client/core' package so please add it to your tsconfig.
 
-

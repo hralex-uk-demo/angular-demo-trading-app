@@ -17,6 +17,8 @@ import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { map } from 'rxjs/operators'; 
 import { Observable } from 'rxjs';
 
+import { Apollo, gql } from 'apollo-angular';
+
 @Component({
   selector: 'app-stocks',
   templateUrl: './stocks.component.html',
@@ -32,12 +34,26 @@ export class StocksComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private stockService: StockService, public dialog: MatDialog) {
+  constructor(private stockService: StockService, public dialog: MatDialog, private apollo: Apollo) {
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Stockdetails>();
     //this.getLatestStockDetails();
+    this.apollo
+    .watchQuery({
+      query: gql`
+        {
+          rates(currency: "USD") {
+            currency
+            rate
+          }
+        }
+      `,
+    })
+    .valueChanges.subscribe((result: any) => {
+      console.log("GraphQL result");
+    });
   }
 
   getLatestStockDetailsGraphQL() {
