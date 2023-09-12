@@ -28,7 +28,7 @@ export class LoginComponent {
   private readonly hardcodedUsername = 'admin';
   private readonly hardcodedPassword = 'admin123';
   
-  constructor(private router:Router, private formBuilder: FormBuilder, private store: Store) {
+  constructor(private router:Router, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
     userName: ['', Validators.required],
     password: ['', Validators.required]
@@ -42,7 +42,7 @@ export class LoginComponent {
     const password = this.loginForm.value.password;
 
     if ( username === this.hardcodedUsername && password === this.hardcodedPassword) {
-      this.store.dispatch(login({ username: username, password: password }));
+      //this.store.dispatch(login({ username: username, password: password }));
       // Navigate to the 'admin/dashboard-view' route if the credentials are correct
       this.router.navigate(['admin/dashboard-view']);
     } else {
