@@ -33,7 +33,7 @@ export class StocksComponent {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Stockdetails>();
-    this.getLatestStockDetails();
+    this.getLatestStockDetails();    
   }
 
   getLatestStockDetails() {
@@ -43,7 +43,7 @@ export class StocksComponent {
       this.dataSource.paginator = this.paginator;  
       this.dataSource._updateChangeSubscription();
     });
-}
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
