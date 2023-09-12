@@ -43,12 +43,20 @@ export class StocksComponent {
     this.apollo
     .watchQuery({
       query: gql`
-        {
-          rates(currency: "USD") {
-            currency
-            rate
+      query listInvestaStocks {
+        listInvestaStocks {
+          items {
+            id
+            stockSymbol
+            companyName
+            currencySymbol
+            exchangeCode
+            sectorName
+            sharePrice
+            status
           }
         }
+      }  
       `,
     })
     .valueChanges.subscribe((result: any) => {

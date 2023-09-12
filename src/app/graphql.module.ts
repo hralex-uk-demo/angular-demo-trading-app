@@ -2,11 +2,20 @@ import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { NgModule } from '@angular/core';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
+import { HttpHeaders } from '@angular/common/http';
 
-const uri = 'https://p54xjue5bfcj3fhhhzlbpqyn4i.appsync-api.eu-north-1.amazonaws.com/graphql'; // <-- add the URL of the GraphQL server here
+
+const uri = 'https://p54xjue5bfcj3fhhhzlbpqyn4i.appsync-api.eu-north-1.amazonaws.com/graphql'; 
+const apiKey = 'da2-uttcubxlhjb3lo5u4bbgcabzoq';
+
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+
+  const headers = new HttpHeaders().set('x-api-key', apiKey);
+
+  const http = httpLink.create({ uri, headers });
+
   return {
-    link: httpLink.create({ uri }),
+   link: http,
     cache: new InMemoryCache(),
   };
 }
