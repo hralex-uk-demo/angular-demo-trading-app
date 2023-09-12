@@ -39,6 +39,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { StoreModule } from '@ngrx/store';
+
 import { AdminDashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminViewComponent } from './admin/dashboard/view/view.component';
 import { StocksComponent } from './admin/stocks/stocks.component';
@@ -138,7 +140,8 @@ import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchan
     ButtonModule,
     TagModule,
     ChipModule,
-    MessagesModule
+    MessagesModule,
+    StoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

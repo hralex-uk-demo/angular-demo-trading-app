@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Message } from 'primeng/api';
 
+import { Store, createAction, props } from '@ngrx/store';
+
 interface User {
   type: string;
   value: string;
@@ -26,7 +28,7 @@ export class LoginComponent {
   private readonly hardcodedUsername = 'admin';
   private readonly hardcodedPassword = 'admin123';
   
-  constructor(private router:Router, private formBuilder: FormBuilder) {
+  constructor(private router:Router, private formBuilder: FormBuilder, private store: Store) {
     this.loginForm = this.formBuilder.group({
     userName: ['', Validators.required],
     password: ['', Validators.required]
@@ -36,7 +38,11 @@ export class LoginComponent {
 
   onLogin() {
     // Check if the provided username and password match the hard-coded values
-    if (this.loginForm.value.userName === this.hardcodedUsername && this.loginForm.value.password === this.hardcodedPassword) {
+    const username = this.loginForm.value.userName;
+    const password = this.loginForm.value.password;
+
+    if ( username === this.hardcodedUsername && password === this.hardcodedPassword) {
+      this.store.dispatch(login({ username: username, password: password }));
       // Navigate to the 'admin/dashboard-view' route if the credentials are correct
       this.router.navigate(['admin/dashboard-view']);
     } else {
@@ -48,3 +54,8 @@ export class LoginComponent {
   }
 
 }
+
+export const login = createAction(
+  '[Login Page] Login',
+  props<{ username: string; password: string }>()
+);
