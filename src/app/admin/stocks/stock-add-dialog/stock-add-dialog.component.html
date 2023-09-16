@@ -3,7 +3,7 @@
   <div mat-dialog-content>
 
     <form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
-      <div style="width:700px">
+      <div style="width:900px">
 
       </div>
 
@@ -15,7 +15,7 @@
           <input matInput  required formControlName="stockSymbol">
         </mat-form-field>
 
-        <mat-form-field appearance="fill" style="width:60%; margin-left:30px" >
+        <mat-form-field appearance="fill" style="width:30%; margin-left:30px" >
           <mat-label>Company Name</mat-label>
           <input matInput  formControlName="companyName" required>
         </mat-form-field>
@@ -26,26 +26,26 @@
       <div>
         <mat-form-field style="width:30%;margin-left:10px" >
           <mat-label>Stock Exchange</mat-label>
-          <mat-select formControlName="stockExchange" required>
-            <mat-option *ngFor="let exchangeType of exchangeTypes" [value]="exchangeType.value">
+          <mat-select formControlName="exchangeCode" required>
+            <mat-option *ngFor="let exchangeType of exchangeTypes" [value]="exchangeType.code">
               {{exchangeType.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field style="width:30%; margin-left:30px">
-          <mat-label>Type</mat-label>
-          <mat-select formControlName="stockType" required>
-            <mat-option *ngFor="let stockType of stockTypes" [value]="stockType.value">
-              {{stockType.name}}
+          <mat-label>Sector</mat-label>
+          <mat-select formControlName="sectorName" required>
+            <mat-option *ngFor="let sectorType of sectorTypes" [value]="sectorType.name">
+              {{sectorType.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field style="width:30%;margin-left:10px" >
           <mat-label>Currency</mat-label>
-          <mat-select formControlName="currencyType" required>
-            <mat-option *ngFor="let currencyType of currencyTypes" [value]="currencyType.value">
+          <mat-select formControlName="currencySymbol" required>
+            <mat-option *ngFor="let currencyType of currencyTypes" [value]="currencyType.code">
               {{currencyType.name}}
             </mat-option>
           </mat-select>
@@ -61,28 +61,16 @@
       <br>
 
     </form>
-    
-      <div>
-              <input type="file" class="file-input"
-              (change)="onFileSelected($event)" #fileUpload style="display: none;">
-            
-              <div class="file-upload" style="margin-left:10px">
-                  <button mat-mini-fab style="background-color: grey;" class="upload-btn"
-                    (click)="fileUpload.click()">
-                    <mat-icon>attach_file</mat-icon>
-                  </button>
-                  {{selectedIconFileName || "Please upload stock symbol."}}
-              </div>
-      </div>
-
     </div>
 
 
   <mat-divider></mat-divider>
   <div mat-dialog-actions>
-    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button color="primary"  style="margin-left:20px;background-color:#36f; color:white">
+    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button 
+                [ngStyle]="{'background-color': stockForm.invalid ? '' : '#36f', 'color': stockForm.invalid ? '' : 'white'}"
+                style="margin-left:20px;">
       <mat-icon>done_all</mat-icon>
-      SAVE
+        SAVE
     </button>
     <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
       <mat-icon>clear</mat-icon>

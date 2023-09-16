@@ -48,19 +48,19 @@
           <!-- Exchange -->
           <ng-container matColumnDef="exchange">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>EXCHANGE</th>
-            <td mat-cell *matCellDef="let row">  {{row.exchange}} </td>
+            <td mat-cell *matCellDef="let row">  {{row.exchangeCode}} </td>
           </ng-container>
 
           <!-- Current Price -->
           <ng-container matColumnDef="currentPrice">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>SHARE PRICE</th>
-            <td mat-cell *matCellDef="let row">  {{row.sharePrice}} </td>
+            <td mat-cell *matCellDef="let row">  {{row.sharePrice | number: '1.2-2'}} </td>
           </ng-container>
 
           <!-- Type Symbol -->
           <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>TYPE</th>
-            <td mat-cell *matCellDef="let row">  {{row.type}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>SECTOR</th>
+            <td mat-cell *matCellDef="let row">  {{row.sectorName}} </td>
           </ng-container>
 
           <!-- Status -->

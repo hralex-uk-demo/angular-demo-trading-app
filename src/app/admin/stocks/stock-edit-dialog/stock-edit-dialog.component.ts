@@ -11,7 +11,18 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Stockdetails } from '../../../admin/shared/model/stockdetails';
-import { StockService } from '../../../admin/shared/service/stock.service';
+import { AdminService } from '../../../admin/shared/service/admin.service';
+import { GraphQLService } from '../../../admin/shared/service/graphql.service';
+
+interface ExchangeSelectBox {
+  code: string;
+  name: string;
+}
+
+interface CurrencySelectBox {
+  code: string;
+  name: string;
+}
 
 interface SelectBox {
   name: string;
@@ -32,27 +43,23 @@ export class StockEditDialogComponent implements OnInit {
     {name: 'Live', value: 'Live'}
   ];
 
-  exchangeTypes: SelectBox[] = [
-    {name: 'NYSE', value: 'NYSE'},
-    {name: 'NASDAQ', value: 'NASDAQ'},
-    {name: 'LSE', value: 'LSE'}
-  ];
 
-  stockTypes: SelectBox[] = [
-    {name: 'ESG', value: 'ESG'},
-    {name: 'Dividend Yielders', value: 'Dividend Yielders'},
-    {name: 'Others', value: 'Others'}
-  ];
+  exchangeTypes: ExchangeSelectBox[] = [];
+  sectorTypes: SelectBox[] = [];
+  currencyTypes: CurrencySelectBox[] = [];
+
 
   constructor(private editStockDialogRef: MatDialogRef<StockEditDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public stockRowObject: any, 
-                  private formBuilder: FormBuilder, private stockService: StockService) {
+                  private formBuilder: FormBuilder, private graphQLService: GraphQLService, 
+                  private adminService: AdminService) {
     this.stockForm = this.formBuilder.group({
       id: [''],
       stockSymbol: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       companyName: ['', Validators.required],
-      stockExchange: ['', Validators.required],
-      stockType: ['', Validators.required],
+      exchangeCode: ['', Validators.required],
+      currencySymbol: ['', Validators.required],
+      sectorName: ['', Validators.required],
       status: ['', Validators.required]
     });
 
@@ -61,25 +68,34 @@ export class StockEditDialogComponent implements OnInit {
       id: this.stockRowObject._id,
       stockSymbol: this.stockRowObject.stockSymbol,
       companyName: this.stockRowObject.companyName,
-      stockExchange: this.stockRowObject.exchange,
-      stockType: this.stockRowObject.type,
+      exchangeCode: this.stockRowObject.exchangeCode,
+      currencySymbol: this.stockRowObject.currencySymbol,
+      sectorName: this.stockRowObject.sectorName,
       status: this.stockRowObject.status
     });
 
   }
 
   ngOnInit() {
+    this.getAllConfigData();
   }
 
   onSubmit() {
     console.info(this.stockForm.value);
-    this.stockService.updateStock(this.stockForm.value).then(response => {
-      console.log("Stock deleted successfully.", response);
-      this.editStockDialogRef.close(this.stockForm.value);
-    })
-    .catch(error => {
-      console.error("Error deleting stock:", error);
-      // Handle error if needed
+
+  }
+
+  getAllConfigData() {
+    this.adminService.getExchangesDetails().subscribe(data => {
+        this.exchangeTypes = data;
+    });
+
+    this.adminService.getSectorsDetails().subscribe(data => {
+      this.sectorTypes = data;
+    });
+
+    this.adminService.getCurrenciesDetails().subscribe(data => {
+      this.currencyTypes = data;
     });
   }
 

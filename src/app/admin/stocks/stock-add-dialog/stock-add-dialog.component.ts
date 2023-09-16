@@ -9,8 +9,19 @@ import {MatIconModule} from '@angular/material/icon';
 import {NgFor} from '@angular/common'
 import {MatDividerModule} from '@angular/material/divider';
 
-import { Stockdetails } from '../../../admin/shared/model/stockdetails';
-import { StockService } from '../../../admin/shared/service/stock.service';
+import { AdminService } from '../../../admin/shared/service/admin.service';
+
+import { GraphQLService } from '../../../admin/shared/service/graphql.service';
+
+interface ExchangeSelectBox {
+  code: string;
+  name: string;
+}
+
+interface CurrencySelectBox {
+  code: string;
+  name: string;
+}
 
 interface SelectBox {
   name: string;
@@ -26,66 +37,59 @@ export class StockAddDialogComponent implements OnInit {
 
   stockForm: FormGroup;
 
-  selectedIconFile: File | null = null;
-
-  selectedIconFileName = '';
-
   statusTypes: SelectBox[] = [
     {name: 'New', value: 'new'},
     {name: 'Live', value: 'live'}
   ];
 
-  exchangeTypes: SelectBox[] = [
-    {name: 'NYSE', value: 'NYSE'},
-    {name: 'NASDAQ', value: 'NASDAQ'},
-    {name: 'LSE', value: 'LSE'}
-  ];
-
-  stockTypes: SelectBox[] = [
-    {name: 'ESG', value: 'ESG'},
-    {name: 'Dividend Yielders', value: 'Dividend Yielders'},
-    {name: 'Others', value: 'Others'}
-  ];
-
-  currencyTypes: SelectBox[] = [
-    {name: 'GBP', value: '£'},
-    {name: 'USD', value: '$'},
-    {name: 'EUR', value: '€'}
-  ];
+  exchangeTypes: ExchangeSelectBox[] = [];
+  sectorTypes: SelectBox[] = [];
+  currencyTypes: CurrencySelectBox[] = [];
 
 
   constructor(private addStockDialogRef: MatDialogRef<StockAddDialogComponent>,
-                     private formBuilder: FormBuilder, private stockService: StockService) {
+                     private formBuilder: FormBuilder, 
+                     private graphQLService: GraphQLService, private adminService: AdminService) {
 
     addStockDialogRef.disableClose = true;  
 
     this.stockForm = this.formBuilder.group({
+      status: 'New',
+      sharePrice: 10.0,
       stockSymbol: ['', [Validators.required, Validators.pattern('^[A-Za-z]+$')]],
       companyName: ['', Validators.required],
-      stockExchange: ['', Validators.required],
-      stockType: ['', Validators.required],
-      currencyType: ['', Validators.required],
-      stockIcon: [null]
+      exchangeCode: ['', Validators.required],
+      sectorName: ['', Validators.required],
+      currencySymbol: ['', Validators.required]
     });
   }
   
   ngOnInit() {
+    this.getAllConfigData();
   }
 
-  onFileSelected(event: any) {
-    this.selectedIconFile = event.target.files[0];
-    if (this.selectedIconFile) {
-      this.selectedIconFileName = this.selectedIconFile.name;
-    }
-  }
 
   onSubmit() {
     console.info(this.stockForm.value);
-    // Load stock data into form
-    this.stockForm.get('stockIcon')?.setValue(this.selectedIconFile);
+    // Load stock data into form    
     console.info(this.stockForm.value);
-    this.stockService.addStock(this.stockForm.value);
-    this.addStockDialogRef.close(this.stockForm.value);
+    this.graphQLService.insertStockDetails(this.stockForm.value).subscribe(data => {
+      this.addStockDialogRef.close(this.stockForm.value);
+    });
+  }
+
+  getAllConfigData() {
+    this.adminService.getExchangesDetails().subscribe(data => {
+        this.exchangeTypes = data;
+    });
+
+    this.adminService.getSectorsDetails().subscribe(data => {
+      this.sectorTypes = data;
+    });
+
+    this.adminService.getCurrenciesDetails().subscribe(data => {
+      this.currencyTypes = data;
+    });
   }
 
 }

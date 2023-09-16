@@ -1,14 +1,9 @@
 # Angular-Demo-Trading-App
 
+# GraphQL Installation
 For installation GraphQL, it imports library and setup latest version
-apollo-angular@5.0.0
+apollo-angular@5.0.1
 
-# Error message while installation
-
-We couldn't find 'esnext.asynciterable' in the list of library files to be included in the compilation.
-It's required by '@apollo/client/core' package so please add it to your tsconfig.
-
-
-We couldn't enable 'allowSyntheticDefaultImports' flag.
-It's required by '@apollo/client/core' package so please add it to your tsconfig.
+https://the-guild.dev/graphql/apollo-angular/docs/get-started
+https://the-guild.dev/graphql/apollo-angular/docs/data/mutations            [documentation]
 

@@ -8,16 +8,16 @@ import { Router } from '@angular/router';
 
 import { Stockdetails } from '../../admin/shared/model/stockdetails';
 import { StockService } from '../../admin/shared/service/stock.service';
+import { GraphQLService } from '../../admin/shared/service/graphql.service';
 import { StockAddDialogComponent } from '../../admin/stocks/stock-add-dialog/stock-add-dialog.component';
 import { StockEditDialogComponent } from '../../admin/stocks/stock-edit-dialog/stock-edit-dialog.component';
 import { StockDeleteDialogComponent } from '../../admin/stocks/stock-delete-dialog/stock-delete-dialog.component';
 
 import {  FormBuilder, FormGroup, Validators  } from '@angular/forms';
 
-import { map } from 'rxjs/operators'; 
 import { Observable } from 'rxjs';
 
-import { Apollo, gql } from 'apollo-angular';
+
 
 @Component({
   selector: 'app-stocks',
@@ -34,47 +34,20 @@ export class StocksComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private stockService: StockService, public dialog: MatDialog, private apollo: Apollo) {
+  constructor(private stockService: StockService, 
+              public dialog: MatDialog, 
+              private graphQLService: GraphQLService) {
   }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Stockdetails>();
-    //this.getLatestStockDetails();
-    this.apollo
-    .watchQuery({
-      query: gql`
-      query listInvestaStocks {
-        listInvestaStocks {
-          items {
-            id
-            stockSymbol
-            companyName
-            currencySymbol
-            exchangeCode
-            sectorName
-            sharePrice
-            status
-          }
-        }
-      }  
-      `,
-    })
-    .valueChanges.subscribe((result: any) => {
-      console.log("GraphQL result");
-    });
+    this.getLatestStockDetailsGraphQL();   
   }
 
   getLatestStockDetailsGraphQL() {
-    this.stockService.getStockDetails().subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;  
-      this.dataSource._updateChangeSubscription();
-    });
-  }
-
-  getLatestStockDetails() {
-    this.stockService.getStockDetails().subscribe(data => {
+    console.log("getLatestStockDetailsGraphQL() method invoked");
+    this.graphQLService.getStockDetails().subscribe(data => {
+      console.log("getLatestStockDetailsGraphQL() method data > ", data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;  
@@ -99,8 +72,8 @@ export class StocksComponent {
           // Handle the result returned from the dialog
           if (result) {
             // Do something with the result in the parent component
-            console.log('Received result from dialog:', result);
-            this.getLatestStockDetails();
+            console.log('Received result from ADD dialog:', result);
+            this.getLatestStockDetailsGraphQL();
           }
         });
 
@@ -119,7 +92,7 @@ export class StocksComponent {
       if (result) {
         // Do something with the result in the parent component
         console.log('Received result from dialog:', result);
-        this.getLatestStockDetails();
+        this.getLatestStockDetailsGraphQL();
       }
     });
 
@@ -137,7 +110,7 @@ export class StocksComponent {
         // Handle the result returned from the dialog
         if (result) {
           // Do something with the result in the parent component
-          this.getLatestStockDetails();
+          this.getLatestStockDetailsGraphQL();
         }
       });
   }
