@@ -43,6 +43,58 @@ export class GraphQLService {
         })
       );
   }
+ 
+  insertStockDetails(stockDataToInsert: any): Observable<any> {
+    const INSERT_STOCK = gql`
+      mutation createInvestaStocks($createinvestastocksinput: CreateInvestaStocksInput!) {
+        createInvestaStocks(input: $createinvestastocksinput) {
+          id
+          stockSymbol
+          companyName
+          currencySymbol
+          sectorName
+          exchangeCode
+          sharePrice
+          status
+        }
+      }
+    `;
+
+    // Generate a new UUID
+    const newUUID = uuidv4();
+
+    const newStockJSON = {
+      id: newUUID,
+      stockSymbol: stockDataToInsert.stockSymbol,
+      companyName: stockDataToInsert.companyName,
+      currencySymbol: stockDataToInsert.currencySymbol,
+      sectorName: stockDataToInsert.sectorName,
+      exchangeCode: stockDataToInsert.exchangeCode,
+      sharePrice: 0.0,
+      status: 'new',
+    };
+
+    return new Observable((observer) => {
+      this.apollo
+        .mutate({
+          mutation: INSERT_STOCK,
+          variables: {
+            createinvestastocksinput: newStockJSON,
+          },
+        })
+        .subscribe(
+          ({ data }) => {
+            console.log('got data', data);
+            observer.next(data);
+            observer.complete();
+          },
+          (error) => {
+            console.log('there was an error sending the query', error);
+            observer.error(error);
+          }
+        );
+    });
+  }
 
   updateStockDetails(stockDataToUpdate: any): Observable<any> {
     console.log("GraphQL updateStockDetails() method called", stockDataToUpdate);
@@ -98,44 +150,32 @@ export class GraphQLService {
         });
   }
 
-  
-  insertStockDetails(stockDataToInsert: any): Observable<any> {
-    const INSERT_STOCK = gql`
-      mutation createInvestaStocks($createinvestastocksinput: CreateInvestaStocksInput!) {
-        createInvestaStocks(input: $createinvestastocksinput) {
-          id
-          stockSymbol
-          companyName
-          currencySymbol
-          sectorName
-          exchangeCode
-          sharePrice
-          status
-        }
-      }
-    `;
+  deleteStockDetails(stockIdToDelete: any): Observable<any> {
+    console.log("GraphQL deleteStockDetails() method called", stockIdToDelete);
 
-    // Generate a new UUID
-    const newUUID = uuidv4();
+    const DELETE_STOCK = gql`
+            mutation DeleteInvestaStock($deleteinvestastocksinput: DeleteInvestaStocksInput!) {
+              deleteInvestaStocks(input: $deleteinvestastocksinput) {
+                id
+              }
+            }
+          `;
 
-    const newStockJSON = {
-      id: newUUID,
-      stockSymbol: stockDataToInsert.stockSymbol,
-      companyName: stockDataToInsert.companyName,
-      currencySymbol: stockDataToInsert.currencySymbol,
-      sectorName: stockDataToInsert.sectorName,
-      exchangeCode: stockDataToInsert.exchangeCode,
-      sharePrice: 0.0,
-      status: 'new',
-    };
 
+    var deleteStockJSON = {};
+    
+    deleteStockJSON =  {
+        id: stockIdToDelete
+      };   
+
+    console.log("GraphQL deleteStockDetails() deleteStockJSON >", deleteStockJSON);
     return new Observable((observer) => {
-      this.apollo
+        this.apollo
         .mutate({
-          mutation: INSERT_STOCK,
+          mutation: DELETE_STOCK,
           variables: {
-            createinvestastocksinput: newStockJSON,
-          },
+            deleteinvestastocksinput: deleteStockJSON
+          }
         })
         .subscribe(
           ({ data }) => {
@@ -147,8 +187,8 @@ export class GraphQLService {
             console.log('there was an error sending the query', error);
             observer.error(error);
           }
-        );
-    });
+          );
+        });
   }
 
 }
