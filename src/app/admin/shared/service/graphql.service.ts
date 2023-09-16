@@ -45,11 +45,11 @@ export class GraphQLService {
   }
 
   updateStockDetails(stockDataToUpdate: any): Observable<any> {
-    console.log("GraphQL updateStockDetails() method called");
+    console.log("GraphQL updateStockDetails() method called", stockDataToUpdate);
 
-    const INSERT_STOCK = gql`
-            mutation UpdateInvestaStock($input: UpdateInvestaStocksInput!) {
-              updateInvestaStocks(input: $input) {
+    const UPDATE_STOCK = gql`
+            mutation UpdateInvestaStock($updateinvestastocksinput: UpdateInvestaStocksInput!) {
+              updateInvestaStocks(input: $updateinvestastocksinput) {
                 id
                 stockSymbol
                 companyName
@@ -63,25 +63,25 @@ export class GraphQLService {
           `;
 
 
-    var newStockJSON = {};
+    var updateStockJSON = {};
     
-    newStockJSON =  {
+    updateStockJSON =  {
         id: stockDataToUpdate.id,
         stockSymbol : stockDataToUpdate.stockSymbol,
         companyName : stockDataToUpdate.companyName,
         currencySymbol : stockDataToUpdate.currencySymbol,
         sectorName :stockDataToUpdate.sectorName,
         exchangeCode : stockDataToUpdate.exchangeCode,
-        status : 'new'
+        status : stockDataToUpdate.status
       };   
 
-    console.log("GraphQL updateStockDetails() newStockJSON >", newStockJSON);
+    console.log("GraphQL updateStockDetails() updateStockJSON >", updateStockJSON);
     return new Observable((observer) => {
         this.apollo
         .mutate({
-          mutation: INSERT_STOCK,
+          mutation: UPDATE_STOCK,
           variables: {
-            createinvestastocksinput: newStockJSON
+            updateinvestastocksinput: updateStockJSON
           }
         })
         .subscribe(

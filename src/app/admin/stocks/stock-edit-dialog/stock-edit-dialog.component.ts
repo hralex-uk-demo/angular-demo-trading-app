@@ -65,7 +65,7 @@ export class StockEditDialogComponent implements OnInit {
 
      // Load stock data into form
      this.stockForm.patchValue({
-      id: this.stockRowObject._id,
+      id: this.stockRowObject.id,
       stockSymbol: this.stockRowObject.stockSymbol,
       companyName: this.stockRowObject.companyName,
       exchangeCode: this.stockRowObject.exchangeCode,
@@ -82,7 +82,9 @@ export class StockEditDialogComponent implements OnInit {
 
   onSubmit() {
     console.info(this.stockForm.value);
-
+    this.graphQLService.updateStockDetails(this.stockForm.value).subscribe(data => {
+      this.editStockDialogRef.close(this.stockForm.value);
+    });
   }
 
   getAllConfigData() {
