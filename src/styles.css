@@ -6,7 +6,13 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Set the body height to 100% of viewport height */
+  overflow: hidden; /* Hide overflow to prevent scrolling */
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .navigation-container {
   width: 98%;
