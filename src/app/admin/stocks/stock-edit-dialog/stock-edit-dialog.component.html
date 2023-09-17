@@ -1,8 +1,9 @@
 <h1 mat-dialog-title>Edit Stock</h1>
 
+<form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+
   <div mat-dialog-content>
 
-    <form  [formGroup]="stockForm" (ngSubmit)="onSubmit()">
       <div style="width:900px">
 
       </div>
@@ -70,7 +71,6 @@
       </div>
       <br>
 
-    </form>
     </div>
 
 
@@ -87,3 +87,5 @@
       CANCEL
     </button>
   </div>
+
+</form>
