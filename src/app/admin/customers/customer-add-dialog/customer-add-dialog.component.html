@@ -55,9 +55,11 @@
   <mat-divider></mat-divider>
 
   <div mat-dialog-actions>
-    <button type="submit" [disabled]="customerForm.invalid" mat-flat-button color="primary"  style="margin-left:20px;background-color:#36f; color:white">
+    <button type="submit" [disabled]="customerForm.invalid" mat-flat-button 
+                [ngStyle]="{'background-color': customerForm.invalid ? '' : '#36f', 'color': customerForm.invalid ? '' : 'white'}"
+                style="margin-left:20px;">
       <mat-icon>done_all</mat-icon>
-      SAVE
+        SAVE
     </button>
     <button mat-flat-button mat-dialog-close color="warn" style="margin-left:10px;background-color:red;color:white">
       <mat-icon>clear</mat-icon>

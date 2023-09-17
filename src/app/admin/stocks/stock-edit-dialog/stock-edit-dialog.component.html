@@ -19,6 +19,16 @@
           <mat-label>Company Name</mat-label>
           <input matInput  formControlName="companyName" required>
         </mat-form-field>
+
+        <mat-form-field style="width:30%;margin-left:10px" >
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option *ngFor="let statusType of statusTypes" [value]="statusType.value">
+              {{statusType.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
       </div>
 
       <br>
@@ -66,7 +76,7 @@
 
   <mat-divider></mat-divider>
   <div mat-dialog-actions>
-    <button type="submit" [disabled]="stockForm.invalid" (click)="onSubmit()" mat-flat-button 
+    <button type="submit" [disabled]="stockForm.invalid" mat-flat-button 
                 [ngStyle]="{'background-color': stockForm.invalid ? '' : '#36f', 'color': stockForm.invalid ? '' : 'white'}"
                 style="margin-left:20px;">
       <mat-icon>done_all</mat-icon>

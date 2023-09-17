@@ -35,7 +35,7 @@ export class SubscriptionAddDialogComponent {
   }
 
   onSubmit() {
-    console.info(this.subscriptionForm.value);
+    console.info("onSubmit() method called >", this.subscriptionForm.value);
     this.adminService.addSubscription(this.subscriptionForm.value);
     this.addCurrencyDialogRef.close(this.subscriptionForm.value);
   }

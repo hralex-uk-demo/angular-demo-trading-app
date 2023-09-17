@@ -39,15 +39,13 @@ export class StockEditDialogComponent implements OnInit {
   stockForm: FormGroup;
 
   statusTypes: SelectBox[] = [
-    {name: 'New', value: 'New'},
-    {name: 'Live', value: 'Live'}
+    {name: 'New', value: 'new'},
+    {name: 'Live', value: 'live'}
   ];
-
 
   exchangeTypes: ExchangeSelectBox[] = [];
   sectorTypes: SelectBox[] = [];
   currencyTypes: CurrencySelectBox[] = [];
-
 
   constructor(private editStockDialogRef: MatDialogRef<StockEditDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public stockRowObject: any, 

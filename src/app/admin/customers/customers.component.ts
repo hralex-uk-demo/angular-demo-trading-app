@@ -127,5 +127,17 @@ export class CustomersComponent implements AfterViewInit {
     return changePercentage > 0 ? 'arrow_upward' : changePercentage < 0 ? 'arrow_downward' : '';
   }
   
+  getSubscriptionPTagColor(subscriptionType: string): string {
+    if (subscriptionType === 'Standard') {
+      return 'success';
+    } else if (subscriptionType === 'Plus') {
+      return 'warning';
+    } else if (subscriptionType === 'Basic') {
+      return 'primary';
+    } else {
+      return 'danger';
+    }
+  }
 
 }
+
