@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 const uri = 'https://p54xjue5bfcj3fhhhzlbpqyn4i.appsync-api.eu-north-1.amazonaws.com/graphql'; 
-const apiKey = 'da2-uttcubxlhjb3lo5u4bbgcabzoq';
+const apiKey = 'da2-2nzixozykne4laba25cnhriay4';
 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
 
