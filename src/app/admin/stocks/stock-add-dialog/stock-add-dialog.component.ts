@@ -13,6 +13,11 @@ import { AdminService } from '../../../admin/shared/service/admin.service';
 
 import { GraphQLService } from '../../../admin/shared/service/graphql.service';
 
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loadCurrencies } from '../../shared/ngrx/currency.actions';
+import { selectCurrencies } from '../../shared/ngrx/currency.selectors';
+
 interface ExchangeSelectBox {
   code: string;
   name: string;
@@ -46,10 +51,13 @@ export class StockAddDialogComponent implements OnInit {
   sectorTypes: SelectBox[] = [];
   currencyTypes: CurrencySelectBox[] = [];
 
+  currencies$: Observable<any[]>;
+
 
   constructor(private addStockDialogRef: MatDialogRef<StockAddDialogComponent>,
                      private formBuilder: FormBuilder, 
-                     private graphQLService: GraphQLService, private adminService: AdminService) {
+                     private graphQLService: GraphQLService, 
+                     private adminService: AdminService, private store: Store) {
 
     addStockDialogRef.disableClose = true;  
 
@@ -62,10 +70,14 @@ export class StockAddDialogComponent implements OnInit {
       sectorName: ['', Validators.required],
       currencySymbol: ['', Validators.required]
     });
+
+    this.currencies$ = this.store.select(selectCurrencies);
+
   }
   
   ngOnInit() {
     this.getAllConfigData();
+    this.store.dispatch(loadCurrencies());
   }
 
 

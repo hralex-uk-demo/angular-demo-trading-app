@@ -39,8 +39,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { StoreModule } from '@ngrx/store';
-
 import { AdminDashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminViewComponent } from './admin/dashboard/view/view.component';
 import { StocksComponent } from './admin/stocks/stocks.component';
@@ -71,6 +69,12 @@ import { ExchangeAddDialogComponent } from './admin/settings/exchanges/exchange-
 import { ExchangeEditDialogComponent } from './admin/settings/exchanges/exchange-edit-dialog/exchange-edit-dialog.component';
 import { ExchangeDeleteDialogComponent } from './admin/settings/exchanges/exchange-delete-dialog/exchange-delete-dialog.component';
 import { GraphQLModule } from './graphql.module';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { currencyReducer } from './admin/shared/ngrx/currency.reducer';
+import { CurrencyEffects } from './admin/shared/ngrx/currency.effects';
+
 
 @NgModule({
   declarations: [
@@ -142,7 +146,8 @@ import { GraphQLModule } from './graphql.module';
     TagModule,
     ChipModule,
     MessagesModule,
-    StoreModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([CurrencyEffects]),
     GraphQLModule
   ],
   providers: [],
