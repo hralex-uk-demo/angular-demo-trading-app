@@ -148,6 +148,7 @@ import { CurrencyEffects } from './admin/shared/ngrx/currency.effects';
     MessagesModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([CurrencyEffects]),
+    StoreModule.forFeature('currency', currencyReducer),
     GraphQLModule
   ],
   providers: [],

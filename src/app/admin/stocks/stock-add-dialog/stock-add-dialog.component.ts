@@ -99,9 +99,11 @@ export class StockAddDialogComponent implements OnInit {
       this.sectorTypes = data;
     });
 
+    /**
     this.adminService.getCurrenciesDetails().subscribe(data => {
       this.currencyTypes = data;
     });
+    */
   }
 
 }
