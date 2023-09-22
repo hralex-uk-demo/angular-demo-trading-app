@@ -45,7 +45,7 @@
         <mat-form-field style="width:30%;margin-left:10px" >
           <mat-label>Currency</mat-label>
           <mat-select formControlName="currencySymbol" required>
-            <mat-option *ngFor="let currency of currencies$ | async" [value]="currency.code">
+            <mat-option *ngFor="let currency of currenciesList | async" [value]="currency.code">
               {{currency.name}}
             </mat-option>
           </mat-select>

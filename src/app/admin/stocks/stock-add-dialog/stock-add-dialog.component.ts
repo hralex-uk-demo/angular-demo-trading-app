@@ -51,7 +51,7 @@ export class StockAddDialogComponent implements OnInit {
   sectorTypes: SelectBox[] = [];
   currencyTypes: CurrencySelectBox[] = [];
 
-  currencies$: Observable<any[]>;
+  currenciesList: Observable<any[]>;
 
 
   constructor(private addStockDialogRef: MatDialogRef<StockAddDialogComponent>,
@@ -71,7 +71,7 @@ export class StockAddDialogComponent implements OnInit {
       currencySymbol: ['', Validators.required]
     });
 
-    this.currencies$ = this.store.select(selectCurrencies);
+    this.currenciesList = this.store.select(selectCurrencies);
 
   }
   
